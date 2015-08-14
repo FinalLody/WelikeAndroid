@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="App异常安全隔离机制,当有一个异常抛出,正常情况下UI线程将无法继续运行,但是使用此机制却能够做到抛出一个未捕获的异常后主线程继续运行."
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抛出一个Error"
+        android:id="@+id/throw_2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抛出一个自定义异常"
+        android:id="@+id/throw_3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抛出一个RuntimeException(框架不拦截,App将被插件杀掉!)"
+        android:id="@+id/throw_1" />
+</LinearLayout>

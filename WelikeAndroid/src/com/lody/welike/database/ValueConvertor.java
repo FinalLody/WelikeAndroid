@@ -1,0 +1,102 @@
+package com.lody.welike.database;
+
+import android.database.Cursor;
+
+import java.lang.reflect.Field;
+
+/**
+ * @author Lody
+ */
+public class ValueConvertor {
+
+    /**
+     * 根据数据类型将数据库中的值写入到相应的字段.
+     *
+     * @param cursor   游标
+     * @param object   赋值对象
+     * @param field    赋值字段
+     * @param dataType 数据类型
+     */
+    public static void setKeyValue(Cursor cursor, Object object, Field field, DataType dataType, int index) {
+        switch (dataType) {
+            case INTEGER:
+                try {
+                    field.set(object, cursor.getInt(index));
+                } catch (IllegalAccessException e) {
+                }
+                break;
+            case TEXT:
+                try {
+                    field.set(object, cursor.getString(index));
+                } catch (IllegalAccessException e) {
+                }
+                break;
+            case FLOAT:
+                try {
+                    field.set(object, cursor.getFloat(index));
+                } catch (IllegalAccessException e) {
+                }
+                break;
+            case BIGINT:
+                try {
+                    field.set(object, cursor.getLong(index));
+                } catch (IllegalAccessException e) {
+                }
+                break;
+            case DOUBLE:
+                try {
+                    field.set(object, cursor.getDouble(index));
+                } catch (IllegalAccessException e) {
+                }
+                break;
+        }
+    }
+
+    /**
+     * 根据数据类型从字段中提取值并转换为String
+     *
+     * @param dataType
+     * @param field
+     * @param o
+     * @return
+     * @throws IllegalAccessException 无法转换时抛出的异常
+     */
+    public static String valueToString(DataType dataType, Field field, Object o) throws IllegalAccessException {
+        switch (dataType) {
+            case INTEGER:
+                return String.valueOf((int) field.get(o));
+            case TEXT:
+                return "\"" + field.get(o) + "" + "\"";
+            case DOUBLE:
+                return String.valueOf((double) field.get(o));
+            case FLOAT:
+                return String.valueOf((float) field.get(o));
+            case BIGINT:
+                return String.valueOf((long) field.get(o));
+        }
+        return null;
+    }
+
+    /**
+     * 根据数据类型将对象转换为String
+     *
+     * @param dataType
+     * @param o
+     * @return
+     */
+    public static String valueToString(DataType dataType, Object o) {
+        switch (dataType) {
+            case INTEGER:
+                return String.valueOf((int) o);
+            case TEXT:
+                return "\"" + o + "\"";
+            case DOUBLE:
+                return String.valueOf((double) o);
+            case FLOAT:
+                return String.valueOf((float) o);
+            case BIGINT:
+                return String.valueOf((long) o);
+        }
+        return null;
+    }
+}
