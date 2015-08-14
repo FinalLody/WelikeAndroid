@@ -1,4 +1,4 @@
-![Logo](we_like.jpg)
+![Logo](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/Welike_Android.png)
 ##WelikeAndroid 是什么?
 WelikeAndroid 是一款引入即用的便捷开发框架,致力于为程序员打造最佳的编程体验,<br>使用WelikeAndroid, 你会觉得写代码是一件很轻松的事情.
 
