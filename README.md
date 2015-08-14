@@ -59,7 +59,7 @@ WeLog.e(t.getName() + "  抛出了一个异常...");
 ```
 * 另外,继承自`UncaughtThrowable`的异常我们不会对其进行拦截.
 
-##WeikeHttp用法:
+##十秒钟学会WeikeHttp:
 * 第一步,取得WelikeHttp默认实例.
 
 ```java
@@ -103,7 +103,7 @@ request.cancel();
 * HttpResultCallback
 * DownloadCallback(仅在<b>download</b>时使用)
 
-##WelikeBitmap用法:
+##十秒钟学会使用WelikeBitmap:
 * 第一步,取得默认的WelikeBitmap实例:
 
 ```java
@@ -191,7 +191,7 @@ db.save(user);
 ```
 * 删,查,改也是同理,具体看API文档.
 
-##WelikeActivity用法
+##十秒钟学会WelikeActivity
 * 我们将Activity的生命周期划分如下:
 ```java
 =>@initData(所有标有InitData的方法都最早在子线程被调用)
