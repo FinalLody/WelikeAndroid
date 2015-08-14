@@ -22,6 +22,8 @@ WelikeAndroid目前包含六个大模块:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 ##WelikeGuard(异常安全隔离机制用法):
+![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
+
 * 第一步,开启异常隔离机制:
 
 ```java
@@ -194,7 +196,7 @@ db.save(user);
 ##十秒钟学会WelikeActivity
 * 我们将Activity的生命周期划分如下:
 ```java
-=>@initData(所有标有InitData的方法都最早在子线程被调用)
+=>@initData(所有标有InitData注解的方法都最早在子线程被调用)
 =>initGlobalView()
 =>@JoinView(将标有此注解的View自动findViewByID和setOnClickListener)
 =>onDataLoaded(数据加载完成时回调)
