@@ -27,8 +27,6 @@ WelikeAndroid目前包含六个大模块:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 ##WelikeGuard(异常安全隔离机制用法):
-![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
-
 * 第一步,开启异常隔离机制:
 
 ```java
@@ -66,7 +64,15 @@ public class CustomException extends IllegalAccessError {
 ```
 * 另外,继承自`UncaughtThrowable`的异常我们不会对其进行拦截.
 
+![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
+
+
 ##十秒钟学会WeikeHttp:
+ 首先来看看框架的调试信息,是不是一目了然.
+![DEBUG](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log.png)
+![DEBUG2](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log2.png)
+
+
 * 第一步,取得WelikeHttp默认实例.
 
 ```java
@@ -77,30 +83,31 @@ WelikeHttp welikeHttp = WelikeHttp.getDefault();
 ```java
 HttpParams params = new HttpParams();
 params.putParams("app","qr.get",
-"data","Test");//一次性放入两对 参数 和 值
+                 "data","Test");//一次性放入两对 参数 和 值
+
 //发送Get请求
 HttpRequest request = welikeHttp.get("http://api.k780.com:88", params, new HttpResultCallback() {
-@Override
-public void onSuccess(String content) {
-super.onSuccess(content);
-WelikeToast.toast("返回的JSON为:" + content);
-}
+    @Override
+    public void onSuccess(String content) {
+    super.onSuccess(content);
+    WelikeToast.toast("返回的JSON为:" + content);
+    }
 
-@Override
-public void onFailure(HttpResponse response) {
-super.onFailure(response);
-WelikeToast.toast("JSON请求发送失败.");
-}
+    @Override
+    public void onFailure(HttpResponse response) {
+    super.onFailure(response);
+    WelikeToast.toast("JSON请求发送失败.");
+    }
 
-@Override
-public void onCancel(HttpRequest request) {
-super.onCancel(request);
-WelikeToast.toast("请求被取消.");
-}
+    @Override
+    public void onCancel(HttpRequest request) {
+    super.onCancel(request);
+    WelikeToast.toast("请求被取消.");
+    }
 });
 
-//取消请求,会回调onCancel()
-request.cancel();
+    //取消请求,会回调onCancel()
+    request.cancel();
 
 ```
 #### 当然,我们为满足需求提供了多种扩展的Callback,目前我们提供以下Callback供您选择:
