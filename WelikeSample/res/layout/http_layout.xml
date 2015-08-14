@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="16dp"
     android:layout_height="match_parent">
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="发送一个Get请求"
         android:id="@+id/get"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="发送一个JsonGet请求"
         android:id="@+id/jsonGet"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="发送一个Post请求"
         android:id="@+id/post"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="下载百度音乐(带进度条)"
         android:id="@+id/download"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

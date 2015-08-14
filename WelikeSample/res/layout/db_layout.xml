@@ -12,24 +12,35 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/common_btn_green"
+            android:textColor="@android:color/white"
             android:text="增加一条"
             android:id="@+id/add" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/common_btn_green"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="8dp"
             android:text="删掉一条"
             android:id="@+id/remove" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/common_btn_green"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="8dp"
             android:text="查找"
             android:id="@+id/query" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/common_btn_green"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="8dp"
             android:text="修改"
             android:id="@+id/update" />
     </LinearLayout>
