@@ -13,18 +13,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="抛出一个Error"
+        android:text="throw new Error()"
         android:id="@+id/throw_2" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="抛出一个自定义异常"
+        android:text=" throw new CustomException()"
         android:id="@+id/throw_3" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="抛出一个RuntimeException(框架不拦截,App将被插件杀掉!)"
+        android:text="throw new RuntimeException()"
         android:id="@+id/throw_1" />
 </LinearLayout>

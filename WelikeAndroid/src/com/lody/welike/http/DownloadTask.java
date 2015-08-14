@@ -153,7 +153,6 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
     @Override
     public void onUpdate(Integer integer) {
         super.onUpdate(integer);
-        currentState = DownloadController.State.SUCCESS;
         for (DownloadCallback callback : callbacks){
             callback.onProgressUpdate(url,integer);
         }

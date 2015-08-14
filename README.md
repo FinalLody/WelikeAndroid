@@ -1,6 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/Welike_Android.png)
 
-![BSD](https://img.shields.io/crates/l/rustc-serialize.svg)
+![license](https://img.shields.io/crates/l/rustc-serialize.svg)
+[![Github Releases](https://img.shields.io/github/downloads/atom/atom/latest/total.svg)](WelikeAndroid_V1.1.jar)
 ##WelikeAndroid 是什么?
 WelikeAndroid 是一款引入即用的便捷开发框架,致力于为程序员打造最佳的编程体验,<br>使用WelikeAndroid, 你会觉得写代码是一件很轻松的事情.
 

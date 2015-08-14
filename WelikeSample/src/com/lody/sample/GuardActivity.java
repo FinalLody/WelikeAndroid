@@ -31,7 +31,7 @@ public class GuardActivity extends WelikeActivity {
         super.onWidgetClick(widget);
         if (widget == throw1){
             //点击会立刻退出
-            throw new RuntimeException("不应该捕获我");
+            throw new RuntimeException("我是一个RuntimeException.");
         }else if (widget == throw2){
             throw new Error("我是一个Error :)");
 
