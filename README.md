@@ -33,19 +33,19 @@ WelikeGuard.enableGuard();
 
 ```java
 
-//此时只要抛出的不是RuntimeException,UI线程就会继续跑下去
-//效果:抛出一个异常仅仅之后只是显示:出现异常了...,不会崩溃,也不会卡死
 WelikeGuard.registerUnCaughtHandler(new Thread.UncaughtExceptionHandler() {
 @Override
 public void uncaughtException(Thread thread, Throwable ex) {
-//在子线程弹出toast,因为这是在异常被隔离之前的回调
-WelikeGuard.newThreadToast("出现异常了: " + ex.getMessage() );
+
+ WelikeGuard.newThreadToast("出现异常了: " + ex.getMessage() );
+
 }
 });
 ```
 * 你也可以<b>自定义异常</b>:
 
 ```java
+
 /**
 *
 * 自定义的异常,当异常被抛出后,会自动回调onCatchThrowable函数.
@@ -53,9 +53,9 @@ WelikeGuard.newThreadToast("出现异常了: " + ex.getMessage() );
 @Catch(process = "onCatchThrowable")
 public class CustomException extends IllegalAccessError {
 
-public static void onCatchThrowable(Thread t){
-WeLog.e(t.getName() + "  抛出了一个异常...");
-}
+   public static void onCatchThrowable(Thread t){
+    WeLog.e(t.getName() + "  抛出了一个异常...");
+   }
 }
 
 ```
@@ -104,6 +104,8 @@ request.cancel();
 * HttpBitmapCallback(<b>建议使用Bitmap模块</b>)
 * HttpResultCallback
 * DownloadCallback(仅在<b>download</b>时使用)
+
+#### 如需自定义Http模块的配置(如缓存时间),请查看HttpConfig.
 
 ##十秒钟学会使用WelikeBitmap:
 * 第一步,取得默认的WelikeBitmap实例:
@@ -191,6 +193,14 @@ User user = new User();
 user.name = "Lody";
 db.save(user);
 ```
+* 从数据库取出Bean
+
+```java
+
+User savedUser = db.findBeanByID(1);
+
+```
+
 * 删,查,改也是同理,具体看API文档.
 
 ##十秒钟学会WelikeActivity
@@ -219,7 +229,7 @@ Button welikeBtn;
 @JoinView(name = "welike_btn",click = false)
 Button welikeBtn;
 ```
-* `click`为true时会自动调用view的setOnClickListener方法,并在`onWidgetClick`回调.
+* `click`为`true`时会自动调用view的setOnClickListener方法,并在`onWidgetClick`回调.
 * 当需要绑定的是一个`Button`的时候, `click属性`默认为`true`,其它的View则默认为`false`.
 
 ##有问题反馈
