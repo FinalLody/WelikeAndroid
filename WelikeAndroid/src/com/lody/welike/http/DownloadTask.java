@@ -102,7 +102,7 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
             while ((read = inputStream.read(data)) != -1) {
                 total += read;
                 file.write(data, 0, read);
-                progress = (total * 100) / contentLength;
+                progress = total / ((int)(contentLength / 100.f + 0.5f));
                 postUpdate(progress);
                 //判断是否取消了下载
                 if (isCancel) {
