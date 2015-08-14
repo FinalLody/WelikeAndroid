@@ -48,7 +48,9 @@ public class BitmapActivity extends WelikeActivity {
 
             //取得默认的WelikeBitmap实例
             WelikeBitmap welikeBitmap = WelikeBitmap.getDefault();
-            welikeBitmap.loadBitmap(imageView, "http://api.k780.com:88/?data=Welike-Framework&app=qr.get&size=6&level=l", android.R.drawable.btn_star, android.R.drawable.ic_delete, new BitmapCallback() {
+            welikeBitmap.loadBitmap(imageView,
+                    "http://api.k780.com:88/?data=Welike-Framework&app=qr.get&size=6&level=l",
+                    android.R.drawable.btn_star, android.R.drawable.ic_delete, new BitmapCallback() {
 
                 @Override
                 public Bitmap onProcessBitmap(byte[] data) {
@@ -91,8 +93,6 @@ public class BitmapActivity extends WelikeActivity {
             WelikeBitmap.getDefault().getBitmapConfig().getMemoryLruCache().clearAllBitmap();
             WelikeToast.toast("缓存清理成功!");
         }
-
-
 
     }
 }

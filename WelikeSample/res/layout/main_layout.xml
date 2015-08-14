@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="16dp"
     android:layout_height="match_parent">
 
     <ImageView
@@ -9,30 +10,22 @@
         android:layout_height="140dp" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="图片加载引擎"
         android:id="@+id/bitmao"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Http请求引擎"
         android:id="@+id/http"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="数据库一键式引擎"
         android:id="@+id/db"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="异常安全隔离机制(实验阶段)"
         android:id="@+id/guard"
-        android:layout_gravity="center_horizontal" />
+        style="@style/button_style" />
 </LinearLayout>
