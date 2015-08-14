@@ -124,47 +124,47 @@ android.R.drawable.btn_star,//加载中显示的图片
 android.R.drawable.ic_delete,//加载失败时显示的图片
 new BitmapCallback() {
 
-@Override
-public Bitmap onProcessBitmap(byte[] data) {
-//如果需要在加载时处理图片,可以在这里处理,
-//如果不需要处理,就返回null或者不复写这个方法.
-return null;
-}
+    @Override
+    public Bitmap onProcessBitmap(byte[] data) {
+    //如果需要在加载时处理图片,可以在这里处理,
+    //如果不需要处理,就返回null或者不复写这个方法.
+    return null;
+    }
 
-@Override
-public void onPreStart(String url) {
-super.onPreStart(url);
-//加载前回调
-WeLog.d("===========> onPreStart()");
-}
+    @Override
+    public void onPreStart(String url) {
+    super.onPreStart(url);
+    //加载前回调
+    WeLog.d("===========> onPreStart()");
+    }
 
-@Override
-public void onCancel(String url) {
-super.onCancel(url);
-//请求取消时回调
-WeLog.d("===========> onCancel()");
-}
+    @Override
+    public void onCancel(String url) {
+    super.onCancel(url);
+    //请求取消时回调
+    WeLog.d("===========> onCancel()");
+    }
 
-@Override
-public void onLoadSuccess(String url, Bitmap bitmap) {
-super.onLoadSuccess(url, bitmap);
-//图片加载成功后回调
-WeLog.d("===========> onLoadSuccess()");
-}
+    @Override
+    public void onLoadSuccess(String url, Bitmap bitmap) {
+    super.onLoadSuccess(url, bitmap);
+    //图片加载成功后回调
+    WeLog.d("===========> onLoadSuccess()");
+    }
 
-@Override
-public void onRequestHttp(HttpRequest request) {
-super.onRequestHttp(request);
-//图片需要请求http时回调
-WeLog.d("===========> onRequestHttp()");
-}
+    @Override
+    public void onRequestHttp(HttpRequest request) {
+    super.onRequestHttp(request);
+    //图片需要请求http时回调
+    WeLog.d("===========> onRequestHttp()");
+    }
 
-@Override
-public void onLoadFailed(HttpResponse response, String url) {
-super.onLoadFailed(response, url);
-//请求失败时回调
-WeLog.d("===========> onLoadFailed()");
-}
+    @Override
+    public void onLoadFailed(HttpResponse response, String url) {
+    super.onLoadFailed(response, url);
+    //请求失败时回调
+    WeLog.d("===========> onLoadFailed()");
+    }
 });
 ```
 * 如果需要自定义Config,请看BitmapConfig这个类.
@@ -180,7 +180,8 @@ public class User{
 @ID
 public int id;//id可有可无,根据自己是否需要来加.
 
-@NotNull//这个注解表示name字段不能为null
+/*这个注解表示name字段不能为null*/
+@NotNull
 public String name;
 
 }
@@ -206,6 +207,7 @@ User savedUser = db.findBeanByID(1);
 ##十秒钟学会WelikeActivity
 * 我们将Activity的生命周期划分如下:
 ```java
+
 =>@initData(所有标有InitData注解的方法都最早在子线程被调用)
 =>initGlobalView()
 =>@JoinView(将标有此注解的View自动findViewByID和setOnClickListener)
