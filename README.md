@@ -64,8 +64,6 @@ public class CustomException extends IllegalAccessError {
 ```
 * 另外,继承自`UncaughtThrowable`的异常我们不会对其进行拦截.
 
-![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
-
 
 ##十秒钟学会WeikeHttp:
  首先来看看框架的调试信息,是不是一目了然.
@@ -261,3 +259,5 @@ var Me = {
 nickName  : "Lody"
 }
 ```
+###异常隔离机制效果:
+![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
