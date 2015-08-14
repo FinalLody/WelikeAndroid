@@ -259,5 +259,8 @@ var Me = {
 nickName  : "Lody"
 }
 ```
-###异常隔离机制效果:
-![异常隔离机制](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/record.gif)
+
+##你可能会喜欢:
+`KjFrame`: https://github.com/kymjs/KJFrameForAndroid <br>
+`Afinal`: https://github.com/yangfuhai/afinal <br>
+`Xutils`: https://github.com/wyouflf/xUtils <br>
