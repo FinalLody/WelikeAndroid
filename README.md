@@ -65,7 +65,7 @@ public class CustomException extends IllegalAccessError {
 * 另外,继承自`UncaughtThrowable`的异常我们不会对其进行拦截.
 
 
-##十秒钟学会WeikeHttp:
+## WeikeHttp入门:
  首先来看看框架的调试信息,是不是一目了然.
 ![DEBUG](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log.png)
 ![DEBUG2](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log2.png)
@@ -117,7 +117,7 @@ HttpRequest request = welikeHttp.get("http://api.k780.com:88", params, new HttpR
 
 #### 如需自定义Http模块的配置(如缓存时间),请查看HttpConfig.
 
-##十秒钟学会使用WelikeBitmap:
+## WelikeBitmap入门:
 * 第一步,取得默认的WelikeBitmap实例:
 
 ```java
@@ -179,7 +179,7 @@ new BitmapCallback() {
 ```
 * 如果需要自定义Config,请看BitmapConfig这个类.
 
-##WelikeDAO使用方法：
+##WelikeDAO入门：
 * 首先写一个Bean.
 
 ```java
@@ -260,7 +260,5 @@ nickName  : "Lody"
 }
 ```
 
-##你可能会喜欢:
-`KjFrame`: https://github.com/kymjs/KJFrameForAndroid <br>
-`Afinal`: https://github.com/yangfuhai/afinal <br>
-`Xutils`: https://github.com/wyouflf/xUtils <br>
+`Git`: https://github.com/FinalLody/WelikeAndroid<br>
+`Git@OSC`: http://git.oschina.net/lody/WelikeAndroid
