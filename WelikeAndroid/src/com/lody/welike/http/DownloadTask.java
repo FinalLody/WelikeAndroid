@@ -205,11 +205,6 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
         return targetFile;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return targetFile.getAbsolutePath().equals(((DownloadTask) o).getDownloadUrl());
-    }
-
     /**
      * 添加一个回调
      * @param callback
