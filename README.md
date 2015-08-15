@@ -260,7 +260,5 @@ nickName  : "Lody"
 }
 ```
 
-##你可能会喜欢:
-`KjFrame`: https://github.com/kymjs/KJFrameForAndroid <br>
-`Afinal`: https://github.com/yangfuhai/afinal <br>
-`Xutils`: https://github.com/wyouflf/xUtils <br>
+`Git`: https://github.com/FinalLody/WelikeAndroid
+`Git@OSC`: http://git.oschina.net/lody/WelikeAndroid
