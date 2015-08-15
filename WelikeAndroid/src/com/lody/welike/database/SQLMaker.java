@@ -84,7 +84,9 @@ public class SQLMaker {
                     break;
                 default:
                     try {
-                        statement.append(ValueConvertor.valueToString(primaryDataType, tableInfo.primaryField, o)).append(",");
+                        statement
+                                .append(ValueConvertor.valueToString(primaryDataType, tableInfo.primaryField, o))
+                                .append(",");
                     } catch (IllegalAccessException e) {
                     }
                     break;
@@ -187,6 +189,5 @@ public class SQLMaker {
     public static String selectTable(String tableName) {
         return "SELECT * FROM " + tableName;
     }
-
 
 }

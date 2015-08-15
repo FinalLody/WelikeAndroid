@@ -77,6 +77,9 @@ public class DbActivity extends WelikeActivity {
 
     private void queryEvent() {
         final EditText editText = new EditText(this);
+        String queryField = "id=";
+        editText.setText(queryField);
+        editText.setSelection(queryField.length());
         new AlertDialog.Builder(this)
                 .setTitle("输入where语句(查询条件)")
                 .setNegativeButton("取消",null)

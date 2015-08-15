@@ -11,7 +11,6 @@ import java.util.Map;
  */
 public class TableInfo {
 
-
     /**
      * 是否包含ID
      */
@@ -40,6 +39,5 @@ public class TableInfo {
      * 是否已经创建
      */
     public boolean isCreate = false;
-
 
 }
