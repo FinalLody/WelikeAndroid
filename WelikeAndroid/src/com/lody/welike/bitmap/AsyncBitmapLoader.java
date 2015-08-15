@@ -67,7 +67,6 @@ public class AsyncBitmapLoader implements Runnable {
 
     @Override
     public void run() {
-
         for (; ; ) {
             try {
                 final BitmapPackage bitmapPackage = packageBlockingQueue.take();
@@ -151,7 +150,8 @@ public class AsyncBitmapLoader implements Runnable {
                                 int originWidth = bitmap.getWidth();
                                 int originHeight = bitmap.getHeight();
 
-                                bitmap = BitmapPreprocessor.zoomBitmap(bitmap, width == 0 ? originWidth : width, height == 0 ? originHeight : height);
+                                bitmap = BitmapPreprocessor.zoomBitmap(bitmap,
+                                        width == 0 ? originWidth : width, height == 0 ? originHeight : height);
                                 bitmapPackage.config.getMemoryLruCache().putBitmap(url, bitmap);
                                 setImageToView(bitmap, bitmapPackage.request.getView());
                                 if (callback != null) {
@@ -208,17 +208,12 @@ public class AsyncBitmapLoader implements Runnable {
                 WelikeHttp welikeHttp = bitmapPackage.config.getWelikeHttp();
                 //将图片加载任务放入到Http请求队列,如果http请求那边有缓存的话,不会再去请求网络.
                 welikeHttp.enqueue(request);
-
-
             } catch (InterruptedException e) {
                 if (mQuit) {
                     break;
                 }
             }
-
-
         }
-
     }
 
     /**
@@ -240,7 +235,6 @@ public class AsyncBitmapLoader implements Runnable {
                 }
             }
         }
-
     }
 
     /**
@@ -262,7 +256,6 @@ public class AsyncBitmapLoader implements Runnable {
                 }
             }
         }
-
     }
 
     /**
@@ -296,7 +289,6 @@ public class AsyncBitmapLoader implements Runnable {
             bitmapPackage.request.cancel();
         }
     }
-
 
     /**
      * 退出循环

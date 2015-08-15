@@ -122,7 +122,6 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
             }
         }
 
-
         return true;
     }
 
@@ -212,6 +211,8 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
      * @param callback
      */
     public void addCallback(DownloadCallback callback){
-        callbacks.add(callback);
+        if (!callbacks.contains(callback)) {
+            callbacks.add(callback);
+        }
     }
 }

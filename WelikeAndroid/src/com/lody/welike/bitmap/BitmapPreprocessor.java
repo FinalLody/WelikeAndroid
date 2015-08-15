@@ -62,7 +62,6 @@ public class BitmapPreprocessor {
 
         return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
 
-
     }
 
     /**
@@ -255,7 +254,8 @@ public class BitmapPreprocessor {
     public static BitmapDrawable toRoundCorner(BitmapDrawable bitmapDrawable,
                                                int pixels) {
         Bitmap bitmap = bitmapDrawable.getBitmap();
-        bitmapDrawable = new BitmapDrawable(WelikeContext.getApplication().getResources(),toRoundCorner(bitmap, pixels));
+        bitmapDrawable = new BitmapDrawable(WelikeContext.getApplication().getResources(),
+                toRoundCorner(bitmap, pixels));
         return bitmapDrawable;
     }
 

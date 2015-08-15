@@ -74,5 +74,4 @@ public class ImageMemoryLruCache extends MemoryLruCache<String, Bitmap> {
         return remove(url);
     }
 
-
 }

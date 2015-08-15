@@ -85,7 +85,6 @@ public class DownloadController {
         //将下载任务放到任务列表
         downloadTasks.add(downloadTask);
 
-
         return downloadTask;
     }
 
@@ -111,7 +110,6 @@ public class DownloadController {
         downloadTasks.remove(task);
         finishUrlToState.put(task.getDownloadUrl(), task.getCurrentState());
     }
-
 
     /**
      * 下载状态
@@ -145,6 +143,5 @@ public class DownloadController {
         CANCEL
 
     }
-
 
 }
