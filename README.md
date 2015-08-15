@@ -19,6 +19,7 @@ WelikeAndroid目前包含五个大模块:
 * <b>Bitmap模块</b>: 一行代码完成异步显示图片,无需考虑OOM问题,支持加载前对图片做自定义处理.
 * <b>Database模块</b>: 支持NotNull,Table,ID,Ignore等注解,Bean无需Getter和Setter,一键式部署数据库.
 * <b>ui操纵模块</b>: 我们为Activity基类做了完善的封装,继承基类可以让代码更加优雅.
+* `另`:请不要认为功能相似,框架就不是原创,源码摆在眼前,何不看一看?
 
 ## 使用WelikeAndroid需要以下权限：
 
@@ -26,6 +27,7 @@ WelikeAndroid目前包含五个大模块:
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+##下文将教你如何圆润的使用WelikeAndroid<br>
 ##WelikeGuard(异常安全隔离机制用法):
 * 第一步,开启异常隔离机制:
 
@@ -211,8 +213,21 @@ db.save(user);
 User savedUser = db.findBeanByID(1);
 
 ```
+* 更新指定ID的Bean
 
-* 删,查,改也是同理,具体看API文档.
+```java
+User wantoUpdateUser = new User();
+wantoUpdateUser.name = "NiHao";
+db.updateDbByID(wantoUpdateUser);
+```
+
+* 删除指ID定的Bean
+
+```java
+db.deleteBeanByID(1);
+```
+
+* 更多实例请看DEMO和API文档.
 
 ##十秒钟学会WelikeActivity
 * 我们将Activity的生命周期划分如下:
