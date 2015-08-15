@@ -297,7 +297,11 @@ public class HttpRequest {
                 //写入文件表单描述
                 outputStream.writeBytes("Content-Disposition: form-data; name=\"" + param + "\"; filename=\"" + URLEncoder.encode(file.getName(), httpConfig.getEncoding()) + "\"\r\n");
                 //写入文件类型
-                outputStream.writeBytes("Content-Type: " + getContentType(file) + "\r\n");
+                String contentType = params.getHeader("Content-Type");
+                if(contentType == null){
+                    contentType = getContentType(file);
+                }
+                outputStream.writeBytes("Content-Type: " + contentType + "\r\n");
                 outputStream.writeBytes("\r\n");
                 //写入文件
                 outputStream.write(IOUtils.getBytes(file));

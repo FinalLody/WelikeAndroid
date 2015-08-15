@@ -47,7 +47,6 @@ public class HttpParams {
      * @return
      */
     public String getHeader(String property) {
-
         return header.get(property);
     }
 
@@ -124,7 +123,6 @@ public class HttpParams {
      * @return
      */
     public HttpParams putFile(String property, File file) {
-
         uploadFiles.put(property, file);
         return this;
     }
@@ -202,7 +200,6 @@ public class HttpParams {
      */
     public HttpParams setAccept(String acceptMime) {
         putHeader("Accept", acceptMime);
-
         return this;
     }
 

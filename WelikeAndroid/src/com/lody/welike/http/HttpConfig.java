@@ -32,20 +32,17 @@ public class HttpConfig {
     /**
      * 默认缓存上限
      */
-    public static long CACHE_MAX_SIZE = 8 * 1024 * 1024;
+    public static long CACHE_MAX_SIZE = 8 * 1024 * 1024 * 8;
 
     /**
      * 缓存上限,默认大小为{@value HttpConfig#CACHE_MAX_SIZE}.
      */
     public long maxDiskCacheSize = HttpConfig.CACHE_MAX_SIZE;
-    ;
-
 
     /**
      * 缓存的文件夹名.
      */
     public String cacheDirName;
-
 
     /**
      * DiskLruCache缓存
