@@ -14,8 +14,6 @@ import java.util.Map;
  */
 
 public class HttpRequestBuilder {
-
-
     private String url;
     private RequestMethod method = RequestMethod.GET;
     private HttpConfig httpConfig;
@@ -33,7 +31,6 @@ public class HttpRequestBuilder {
      * @return
      */
     public static HttpRequestBuilder newBuilder(String url) {
-
         return new HttpRequestBuilder(url);
     }
 
@@ -44,7 +41,6 @@ public class HttpRequestBuilder {
      * @return
      */
     public HttpRequestBuilder requestMethod(RequestMethod requestMethod) {
-
         this.method = requestMethod;
         return this;
     }
@@ -55,9 +51,7 @@ public class HttpRequestBuilder {
      * @param config
      * @return
      */
-
     public HttpRequestBuilder config(HttpConfig config) {
-
         this.httpConfig = config;
         return this;
     }
@@ -73,7 +67,6 @@ public class HttpRequestBuilder {
         return this;
     }
 
-
     /**
      * 配置参数
      *
@@ -85,7 +78,6 @@ public class HttpRequestBuilder {
             this.params = new HttpParams();
         }
         this.params.putAllParams(params);
-
         return this;
     }
 
@@ -97,7 +89,6 @@ public class HttpRequestBuilder {
      * @return
      */
     public HttpRequestBuilder withFile(String name, File file) {
-
         if (this.params == null) {
             this.params = new HttpParams();
         }

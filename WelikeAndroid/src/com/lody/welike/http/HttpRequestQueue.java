@@ -129,7 +129,6 @@ public class HttpRequestQueue implements Runnable {
         synchronized (this) {
             for (HttpRequest request : requestQueue) {
                 request.cancel();
-                ;
             }
             requestQueue.clear();
         }

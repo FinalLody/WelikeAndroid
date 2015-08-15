@@ -233,14 +233,12 @@ public class HttpRequest {
 
 
     public void writeToStream(DataOutputStream outputStream) {
-
         boolean isUpload = params.getUploadFiles().size() > 0;
         if (isUpload) {
             writeToStreamUploadMode(outputStream);
         } else {
             writeToStreamNormal(outputStream);
         }
-
     }
 
     /**
@@ -255,7 +253,6 @@ public class HttpRequest {
             }
         }
         return cacheKey;
-
     }
 
     /**

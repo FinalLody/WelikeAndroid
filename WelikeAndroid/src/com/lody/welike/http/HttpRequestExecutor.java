@@ -44,9 +44,9 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
         this.callback = request.getHttpCallback();
         response = new HttpResponse();
         response.httpRequest = request;
-        enableDiskLruCache = (request.getHttpConfig().getDiskLruCache() != null) && request.getHttpConfig().enableDiskCache;
+        enableDiskLruCache = (request.getHttpConfig().getDiskLruCache() != null)
+                && request.getHttpConfig().enableDiskCache;
     }
-
 
     @Override
     public void onPrepare() {
@@ -58,7 +58,6 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
 
     @Override
     public Void onTask(Void... params) {
-
         if (request.isCancel()) {
             //任务已取消
             synchronized (request) {
@@ -80,12 +79,10 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
         String key = request.getCacheKey();
         String hashUrl = null;
         if (!(request.getParams().getUploadFiles().size() > 0) && enableDiskLruCache) {
-
             if (debugMode) WeLog.d("正在处理Http请求: " + key);
 
             hashUrl = HashUtils.hashKey(key);
             if (enableDiskLruCache) {
-
                 if (debugMode) WeLog.d("请求的缓存为开启状态.");
                 try {
                     DiskLruCache.Snapshot snapshot = request.getHttpConfig().getDiskLruCache().get(hashUrl);
@@ -96,11 +93,10 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
                             long lostTime = (timeoutDate - System.currentTimeMillis());
                             if (lostTime > 0) {
                                 if (debugMode)
-                                    WeLog.d("距离缓存过期还有 " + (lostTime / 1000 / 60) + "分钟 " + (lostTime / 1000 - lostTime / 1000 / 60 * 60) + "秒");
-
+                                    WeLog.d("距离缓存过期还有 " + (lostTime / 1000 / 60) + "分钟 "
+                                            + (lostTime / 1000 - lostTime / 1000 / 60 * 60) + "秒");
                             } else {
                                 if (debugMode) WeLog.d(key + "的缓存已过期.");
-
                             }
                         } else {
                             //缓存永久有效
@@ -197,7 +193,6 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
             callFailureOnUiThread(callback, response);
         }
 
-
         return null;
     }
 
@@ -290,7 +285,8 @@ public class HttpRequestExecutor extends MultiAsyncTask<Void, Void, Void> {
 
                     if (callback instanceof HttpResultCallback) {
                         try {
-                            ((HttpResultCallback) callback).onSuccess(new String(response.data, request.getHttpConfig().getEncoding()));
+                            ((HttpResultCallback) callback).onSuccess(new String(response.data,
+                                    request.getHttpConfig().getEncoding()));
                         } catch (UnsupportedEncodingException e) {
                         }
                     } else if (callback instanceof HttpBitmapCallback) {

@@ -36,7 +36,6 @@ public class BitmapActivity extends WelikeActivity {
     public void initGlobalView(Bundle savedInstanceState) {
         super.initGlobalView(savedInstanceState);
         setContentView(R.layout.bitmap_layout);
-
     }
 
 
@@ -54,8 +53,7 @@ public class BitmapActivity extends WelikeActivity {
 
                 @Override
                 public Bitmap onProcessBitmap(byte[] data) {
-                    Bitmap bitmap = BitmapPreprocessor.decodeBitmapNoOOM(data);
-                    return bitmap;
+                    return super.onProcessBitmap(data);
                 }
 
                 @Override
