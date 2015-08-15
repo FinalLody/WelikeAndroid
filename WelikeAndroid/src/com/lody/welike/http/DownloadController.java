@@ -84,7 +84,7 @@ public class DownloadController {
         DownloadTask downloadTask = new DownloadTask(this, url, target, callback);
         //将下载任务放到任务列表
         downloadTasks.add(downloadTask);
-
+        downloadTask.execute();
         return downloadTask;
     }
 

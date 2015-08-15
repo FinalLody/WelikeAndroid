@@ -162,7 +162,7 @@ public class WelikeHttp {
      * @return 下载控制器
      */
     public DownloadController download(String url, File target, DownloadCallback callback) {
-        this.downloadController.startDownloadTask(url, target, callback).execute();
+        this.downloadController.startDownloadTask(url, target, callback);
         return downloadController;
     }
 

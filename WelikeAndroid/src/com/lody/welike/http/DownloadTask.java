@@ -96,6 +96,7 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
         //使用字节数组缓冲池
         byte[] data = ByteArrayPool.get().getBuf(2048);
 
+        int oldProgress = 0;
         try {
             int total = 0;
             int read;
@@ -103,7 +104,10 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
                 total += read;
                 file.write(data, 0, read);
                 progress = total / ((int)(contentLength / 100.f + 0.5f));
-                postUpdate(progress);
+                if (progress - oldProgress >= 1) {
+                    oldProgress = progress;
+                    postUpdate(progress);
+                }
                 //判断是否取消了下载
                 if (isCancel) {
                     return false;
