@@ -58,7 +58,7 @@ public abstract class BitmapCallback {
     /**
      * 需要将字节数组转换为Bitmap时回调
      * @param data
-     * @return
+     * @return 可以为null, 也可以为自己处理后的Bitmap
      */
     public Bitmap onProcessBitmap(byte[] data){
         return null;

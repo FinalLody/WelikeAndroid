@@ -10,8 +10,8 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 表示一个下载任务,支持下载进度显示
@@ -34,7 +34,7 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
     /**
      * 下载回调
      */
-    private List<DownloadCallback> callbacks = new ArrayList<>();
+    private Set<DownloadCallback> callbacks = new HashSet<>();
 
     /**
      * 下载到的位置

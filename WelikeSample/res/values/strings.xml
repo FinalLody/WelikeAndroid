@@ -1,5 +1,6 @@
 <resources>
 
     <string name="app_name">WelkeSample</string>
+    <string name="guard_msg">App异常安全隔离机制,就连throw XxxException()也无法阻挡程序的正常运行!</string>
 
 </resources>

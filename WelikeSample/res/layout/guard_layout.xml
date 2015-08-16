@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="App异常安全隔离机制,当有一个异常抛出,正常情况下UI线程将无法继续运行,但是使用此机制却能够做到抛出一个未捕获的异常后主线程继续运行."
+        android:text="@string/guard_msg"
         android:id="@+id/textView" />
 
     <Button
