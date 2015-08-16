@@ -113,9 +113,9 @@ HttpRequest request = welikeHttp.get("http://api.k780.com:88", params, new HttpR
 ```
 #### 当然,我们为满足需求提供了多种扩展的Callback,目前我们提供以下Callback供您选择:
 * HttpCallback(响应为<b>byte[]数组</b>)
-* FileUploadCallback
+* FileUploadCallback(仅在<b>上传文件时</b>使用)
 * HttpBitmapCallback(<b>建议使用Bitmap模块</b>)
-* HttpResultCallback
+* HttpResultCallback(响应为<b>String</b>)
 * DownloadCallback(仅在<b>download</b>时使用)
 
 #### 如需自定义Http模块的配置(如缓存时间),请查看HttpConfig.

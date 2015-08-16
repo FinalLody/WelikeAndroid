@@ -19,10 +19,13 @@ import java.io.IOException;
 
 /**
  * @author Lody
- *         <p/>
+ *         <br>
  *         本框架的Http请求核心类,封装了Http异步的API,
  *         你只需要一句话就可以完成Get,Post的简单请求.
  *         注意{@link HttpConfig}的合理配置.这可能会使框架发挥更好的性能.
+ *
+ *         @see HttpRequest
+ *         @see com.lody.welike.http.HttpRequestBuilder
  */
 public class WelikeHttp {
 
@@ -178,6 +181,18 @@ public class WelikeHttp {
         return downloadController;
     }
 
+    /**
+     * 从Url下载一个文件
+     *
+     * @param url        路径
+     * @param targetPath 下载到的地方
+     * @return 下载控制器
+     */
+    public DownloadController download(String url, String targetPath) {
+        this.downloadController.startDownloadTask(url, new File(targetPath), null).execute();
+        return downloadController;
+    }
+
 
     /**
      * 创建一个Http请求,仅在请求十分简单的情况下使用本方法,
@@ -234,7 +249,7 @@ public class WelikeHttp {
 
     /**
      * 销毁WeLikeHttp实例<br>
-     * <b>警告:慎用此方法</b>,本方法调用后将会释放全部的资源,Http请求执行队列也会被停止.
+     * <b>警告:慎用此方法</b>, 本方法调用后将会释放全部的资源,Http请求执行队列也会被停止.
      * 调用本方法后请确定实例不会被继续使用,否则将抛出空指针.
      */
     public void destroy() {

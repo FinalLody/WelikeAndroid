@@ -17,6 +17,9 @@ import java.io.IOException;
  */
 public class HttpConfig {
 
+    /**
+     * 默认缓存文件夹名
+     */
     public static String DEFAULT_CACHE_DIR_NAME = "http";
     /**
      * 默认编码
@@ -24,7 +27,7 @@ public class HttpConfig {
     public static String DEFAULT_HTTP_ENCODE = "UTF-8";
 
     /**
-     * 默认缓存过期时间
+     * 默认缓存过期时间,默认为8分钟
      */
     public static long DEFAULT_EXPIRY_TIME = 8 * 1000 * 60;
 
