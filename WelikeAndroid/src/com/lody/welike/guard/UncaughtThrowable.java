@@ -9,7 +9,7 @@ import com.lody.welike.guard.annotation.UnCatch;
  * @version 1.0
  */
 @UnCatch
-public class UncaughtThrowable extends Throwable {
+public class UncaughtThrowable extends NullPointerException {
 
 	/**
 	 * 

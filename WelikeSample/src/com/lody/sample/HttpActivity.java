@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.lody.welike.WelikeHttp;
+import com.lody.welike.http.DownloadController;
+import com.lody.welike.http.DownloadTask;
 import com.lody.welike.http.HttpParams;
 import com.lody.welike.http.HttpRequest;
 import com.lody.welike.http.HttpResponse;
@@ -36,6 +38,7 @@ public class HttpActivity extends WelikeActivity {
     Button downloadButton;
     @JoinView(name = "progressBar",click = true)
     ProgressBar progressBar;
+
     @Override
     public void initGlobalView(Bundle savedInstanceState) {
         super.initGlobalView(savedInstanceState);
@@ -61,6 +64,7 @@ public class HttpActivity extends WelikeActivity {
      * 发送一个Post请求
      */
     private void postEvent() {
+
         WelikeHttp.getDefault().post("www.baidu.com", new HttpCallback() {
             @Override
             public void onSuccess(HttpResponse response) {
@@ -110,7 +114,7 @@ public class HttpActivity extends WelikeActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         WelikeHttp.getDefault()
-                                .download("http://123.125.110.15/dd.myapp.com/16891/FCDA105FD408930C58D0145D400F2447.apk?mkey=55cb21cc52a9a1c8&f=d410&fsname=com.ting.mp3.android_5.6.2.8_5628.apk&asr=02f1&p=.apk",
+                                .download("http://www.oschina.net/uploads/git-osc-android-1.2.1.apk",
                                         new File(Environment.getExternalStorageDirectory(), "bdMusic.apk"),
                                         new DownloadCallback() {
                                             @Override
@@ -138,11 +142,13 @@ public class HttpActivity extends WelikeActivity {
                                             }
                                         }
                                 );
+
                     }
                 }).show();
     }
 
     public void getEvent() {
+
         WelikeHttp welikeHttp = WelikeHttp.getDefault();
         welikeHttp.get("www.baidu.com", new HttpCallback() {
             @Override

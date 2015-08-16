@@ -47,4 +47,12 @@ public abstract class DownloadCallback {
     public void onCancel(String url) {
 
     }
+
+    /**
+     * 下载任务暂停
+     * @param url
+     */
+    public void onPause(String url) {
+
+    }
 }

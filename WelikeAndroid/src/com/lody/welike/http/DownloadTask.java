@@ -1,8 +1,13 @@
 package com.lody.welike.http;
 
+import android.os.*;
+import android.os.Process;
+
+import com.lody.welike.guard.UncaughtThrowable;
 import com.lody.welike.http.callback.DownloadCallback;
 import com.lody.welike.utils.ByteArrayPool;
 import com.lody.welike.utils.MultiAsyncTask;
+import com.lody.welike.utils.WeLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +16,7 @@ import java.io.RandomAccessFile;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +25,7 @@ import java.util.Set;
  * @author Lody
  * @version 1.3
  */
-public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
+public class DownloadTask extends MultiAsyncTask<Void, Integer, DownloadController.State> {
 
     /**
      * 下载的Url
@@ -56,16 +62,44 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
     private boolean isCancel = false;
 
     /**
+     * 是否已经暂停
+     */
+    private boolean isPause = false;
+
+    private int finishedLength = 0;
+
+
+
+    /**
      * @param url
      * @param target
-     * @param callback
+     * @param callbacks
      */
-    public DownloadTask(DownloadController controller, String url, File target, DownloadCallback callback) {
+    public DownloadTask(DownloadController controller, String url, File target, DownloadCallback... callbacks) {
         this.controller = controller;
         this.url = url;
         this.targetFile = target;
-        this.callbacks.add(callback);
+        for (DownloadCallback callback : callbacks){
+            this.callbacks.add(callback);
+        }
     }
+
+
+    /**
+     * @param url
+     * @param target
+     * @param callbacks
+     */
+    public DownloadTask(DownloadController controller, String url, File target, Set<DownloadCallback> callbacks) {
+        this.controller = controller;
+        this.url = url;
+        this.targetFile = target;
+        for (DownloadCallback callback : callbacks){
+            this.callbacks.add(callback);
+        }
+    }
+
+
 
     @Override
     public void onPrepare() {
@@ -76,7 +110,7 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
     }
 
     @Override
-    public Boolean onTask(Void... urls) {
+    public DownloadController.State onTask(Void... urls) {
         currentState = DownloadController.State.DOWNLOADING;
         RandomAccessFile file;
         URL url;
@@ -85,72 +119,86 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
         int contentLength;
         try {
             file = new RandomAccessFile(targetFile, "rwd");
-            file.seek(0);
             url = new URL(this.url.startsWith("http://") ? this.url : "http://" + this.url);
             connection = url.openConnection();
-            inputStream = connection.getInputStream();
             contentLength = connection.getContentLength();
+
+            inputStream = connection.getInputStream();
         } catch (Throwable e) {
-            return false;
+            e.printStackTrace();
+            return DownloadController.State.FAILED;
         }
         //使用字节数组缓冲池
         byte[] data = ByteArrayPool.get().getBuf(2048);
 
         int oldProgress = 0;
         try {
-            int total = 0;
             int read;
             while ((read = inputStream.read(data)) != -1) {
-                total += read;
+                finishedLength += read;
                 file.write(data, 0, read);
-                progress = total / ((int)(contentLength / 100.f + 0.5f));
+                progress = finishedLength / ((int)(contentLength / 100.f + 0.5f));
                 if (progress - oldProgress >= 1) {
                     oldProgress = progress;
                     postUpdate(progress);
                 }
                 //判断是否取消了下载
                 if (isCancel) {
-                    return false;
+                    return DownloadController.State.CANCEL;
+                }
+                if (isPause){
+                    return DownloadController.State.PAUSE;
                 }
             }
             //回收字节数组
             ByteArrayPool.get().returnBuf(data);
 
         } catch (IOException e) {
-            return false;
+            e.printStackTrace();
+            return DownloadController.State.FAILED;
         } finally {
             try {
                 file.close();
                 inputStream.close();
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
-        return true;
+        return DownloadController.State.SUCCESS;
     }
 
     @Override
-    public void onResult(Boolean success) {
-        super.onResult(success);
-        if (success) {
-            currentState = DownloadController.State.SUCCESS;
+    public void onResult(DownloadController.State result) {
+        super.onResult(result);
+        this.currentState = result;
+
+        if (result == DownloadController.State.SUCCESS) {
             for (DownloadCallback callback : callbacks){
                 callback.onDownloadSuccess(url, targetFile);
+                callbacks.clear();
+                controller.finish(this);
             }
 
-        } else if (isCancel) {
-            currentState = DownloadController.State.CANCEL;
+        } else if (result == DownloadController.State.CANCEL) {
             for (DownloadCallback callback : callbacks){
                 callback.onCancel(url);
+                callbacks.clear();
+                controller.finish(this);
             }
-        } else {
-            currentState = DownloadController.State.FAILED;
+        } else if (result == DownloadController.State.FAILED){
             for (DownloadCallback callback : callbacks){
                 callback.onDownloadFailed(url);
+                callbacks.clear();
+                controller.finish(this);
+            }
+        }else if (result == DownloadController.State.PAUSE){
+            WeLog.d(":::::::::Paused**");
+            for (DownloadCallback callback : callbacks) {
+                callback.onPause(url);
             }
         }
-        callbacks.clear();
-        controller.finish(this);
+
     }
 
     @Override
@@ -213,5 +261,33 @@ public class DownloadTask extends MultiAsyncTask<Void, Integer, Boolean> {
         if (!callbacks.contains(callback)) {
             callbacks.add(callback);
         }
+    }
+
+
+    public int getFinishedLength() {
+        return finishedLength;
+    }
+
+    public void setFinishedLength(int finishedLength) {
+        this.finishedLength = finishedLength;
+    }
+
+
+    /**
+     * 暂停
+     */
+    public void pause(){
+        isPause = true;
+
+    }
+
+    public void resume(){
+        if (isPause){
+            execute();
+        }
+    }
+
+    public Set<DownloadCallback> getCallbacks() {
+        return callbacks;
     }
 }

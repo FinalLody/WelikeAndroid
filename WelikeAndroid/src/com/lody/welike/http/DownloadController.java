@@ -1,6 +1,7 @@
 package com.lody.welike.http;
 
 import com.lody.welike.http.callback.DownloadCallback;
+import com.lody.welike.utils.WeLog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class DownloadController {
 
         for (DownloadTask downloadTask : downloadTasks) {
             if (downloadTask.getDownloadUrl().equals(url)) {
-                return downloadTask;
+                    return downloadTask;
             }
         }
         return null;
@@ -140,7 +141,11 @@ public class DownloadController {
         /**
          * 下载任务已经取消
          */
-        CANCEL
+        CANCEL,
+        /**
+         * 下载任务暂停
+         */
+        PAUSE
 
     }
 
