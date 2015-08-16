@@ -27,7 +27,8 @@ WelikeAndroid目前包含五个大模块:
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.INTERNET" />
 ```
-##下文将教你如何圆润的使用WelikeAndroid<br>
+
+##下文将教你如何圆润的使用WelikeAndroid:<br>
 ##WelikeGuard(异常安全隔离机制用法):
 * 第一步,开启异常隔离机制:
 
