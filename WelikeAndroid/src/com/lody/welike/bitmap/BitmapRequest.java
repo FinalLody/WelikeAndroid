@@ -7,6 +7,7 @@ import android.view.View;
 import com.lody.welike.bitmap.callback.BitmapCallback;
 
 /**
+ * 封装一个图片加载的请求
  * @author Lody
  * @version 1.0
  */

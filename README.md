@@ -29,6 +29,10 @@ WelikeAndroid目前包含五个大模块:
 ```
 
 ##下文将教你如何圆润的使用WelikeAndroid:<br>
+###通过WelikeContext在任意处取得上下文:
+* WelikeContext.getApplication(); 就可以取得当前App的上下文
+* WelikeToast.toast("你好!");  简单异步弹出Toast.<br>
+
 ##WelikeGuard(异常安全隔离机制用法):
 * 第一步,开启异常隔离机制:
 
