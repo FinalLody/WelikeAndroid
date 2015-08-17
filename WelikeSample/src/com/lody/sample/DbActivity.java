@@ -40,6 +40,7 @@ public class DbActivity extends WelikeActivity {
         super.initGlobalView(savedInstanceState);
         dao = WelikeDao.instance("Welike.db");
         setContentView(R.layout.db_layout);
+        dao.dropAllTable();
     }
 
     @Override
@@ -66,6 +67,7 @@ public class DbActivity extends WelikeActivity {
     private void updateEvent() {
         try{
             MyBean myBean = new MyBean();
+            myBean.isOK = false;
             myBean.name = "This is a updated field.";
             dao.updateByID(MyBean.class,1,myBean);
             WelikeToast.toast("更新成功!");
@@ -92,7 +94,8 @@ public class DbActivity extends WelikeActivity {
                     textView.setText("");
                     for (MyBean myBean : myBeans){
                         textView.append("ID:      " + myBean.id );
-                        textView.append("    Name :    " + myBean.name + "\n");
+                        textView.append("    Name :    " + myBean.name);
+                        textView.append("    isOK :    " + myBean.isOK + "\n");
                     }
                 } catch (Throwable e) {
                     WelikeToast.toast("操作失败:" + e.getMessage());
@@ -142,7 +145,8 @@ public class DbActivity extends WelikeActivity {
         List<MyBean> myBeans = dao.findAll(MyBean.class);
         for (MyBean myBean : myBeans){
             textView.append("ID:      " + myBean.id );
-            textView.append("    Name :    " + myBean.name + "\n");
+            textView.append("    Name :    " + myBean.name);
+            textView.append("    isOK :    " + myBean.isOK + "\n");
         }
     }
 }

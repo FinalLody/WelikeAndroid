@@ -8,7 +8,10 @@ import java.lang.reflect.Field;
 /**
  * @author Lody
  *         解析Java的<b>数据类型</b>,将其转换为对应的SQL类型.
- * @version 2.1
+ *
+ *         2015/8/17 :支持 boolean 类型.
+ *
+ * @version 2.2
  */
 public class SQLTypeParser {
 
@@ -30,6 +33,8 @@ public class SQLTypeParser {
             return DataType.BIGINT.nullable((field.getAnnotation(NotNull.class) == null));
         } else if (clazz == (double.class) || clazz == (Double.class)) {
             return DataType.DOUBLE.nullable((field.getAnnotation(NotNull.class) == null));
+        } else if (clazz == (boolean.class) || clazz == (Boolean.class)) {
+            return DataType.INTEGER.nullable((field.getAnnotation(NotNull.class) == null));
         }
         return null;
     }
@@ -51,6 +56,8 @@ public class SQLTypeParser {
             return DataType.BIGINT;
         } else if (clazz == (double.class) || clazz == (Double.class)) {
             return DataType.DOUBLE;
+        } else if (clazz == (boolean.class) || clazz == (Boolean.class)) {
+            return DataType.INTEGER;
         }
         return null;
     }

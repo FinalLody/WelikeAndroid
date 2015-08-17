@@ -12,4 +12,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ID {
+    /**
+     * 只对Integer类型的ID字段有效
+     *
+     * @return
+     */
+    boolean autoIncrement() default false;
 }

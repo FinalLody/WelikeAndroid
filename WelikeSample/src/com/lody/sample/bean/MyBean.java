@@ -13,4 +13,5 @@ public class MyBean {
     @ID
     public int id;
     public String name;
+    public boolean isOK = true;
 }

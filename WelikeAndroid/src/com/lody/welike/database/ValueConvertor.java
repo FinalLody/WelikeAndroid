@@ -22,7 +22,13 @@ public class ValueConvertor {
             case INTEGER:
                 try {
                     field.set(object, cursor.getInt(index));
-                } catch (IllegalAccessException e) {
+                } catch (Throwable e) {
+                    try {
+                        //支持Boolean类型
+                        //因为Boolean默认当Integer处理
+                        field.set(object, cursor.getInt(index) != 0);
+                    } catch (IllegalAccessException ignored) {
+                    }
                 }
                 break;
             case TEXT:
@@ -49,6 +55,7 @@ public class ValueConvertor {
                 } catch (IllegalAccessException e) {
                 }
                 break;
+
         }
     }
 
@@ -64,7 +71,12 @@ public class ValueConvertor {
     public static String valueToString(DataType dataType, Field field, Object o) throws IllegalAccessException {
         switch (dataType) {
             case INTEGER:
-                return String.valueOf((int) field.get(o));
+                Object f = field.get(o);
+                if (f instanceof Boolean) {
+                    return String.valueOf(((boolean) field.get(o)) ? 1 : 0);
+                } else {
+                    return String.valueOf((int) field.get(o));
+                }
             case TEXT:
                 return "\"" + field.get(o) + "" + "\"";
             case DOUBLE:
