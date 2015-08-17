@@ -652,6 +652,13 @@ public class WelikeDao {
     }
 
     /**
+     * 通过VACUUM命令压缩数据库
+     */
+    public void vacuum() {
+        db.execSQL("VACUUM");
+    }
+
+    /**
      * 调用本方法会释放当前数据库占用的内存,
      * 调用后请确保你不会在接下来的代码中继续用到本实例.
      */

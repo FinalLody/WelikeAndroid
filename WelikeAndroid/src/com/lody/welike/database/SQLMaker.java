@@ -1,5 +1,6 @@
 package com.lody.welike.database;
 
+import com.lody.welike.database.annotation.ID;
 import com.lody.welike.database.bean.TableInfo;
 
 import java.lang.reflect.Field;
@@ -30,7 +31,11 @@ public class SQLMaker {
             statement.append("'").append(tableInfo.primaryField.getName()).append("'");
             switch (dataType) {
                 case INTEGER:
-                    statement.append(" INTEGER PRIMARY KEY AUTOINCREMENT");
+                    statement.append(" INTEGER PRIMARY KEY ");
+                    ID id = tableInfo.primaryField.getAnnotation(ID.class);
+                    if (id != null && id.autoIncrement()) {
+                        statement.append("AUTOINCREMENT");
+                    }
                     break;
                 default:
                     statement
