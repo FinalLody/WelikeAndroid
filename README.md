@@ -71,8 +71,18 @@ public class CustomException extends IllegalAccessError {
 ```
 * 另外,继承自`UncaughtThrowable`的异常我们不会对其进行拦截.
 
+## 使用Welike做屏幕适配:
+Welike的ViewPorter类提供了屏幕适配的Fluent-API,我们可以通过一组流畅的API轻松做好屏幕适配.
+```java
+        ViewPorter.from(button).ofScreen().divWidth(2).commit();//宽度变为屏幕的二分之一
+        ViewPorter.from(button).of(viewGroup).divHeight(2).commit();//高度变为viewGroup的二分之一
+        ViewPorter.from(button).div(2).commit();//宽度和高度变为屏幕的四分之一
+        ViewPorter.from(button).of(this).fillWidth().fillHeight().commit();//宽度和高度铺满Activity
+        ViewPorter.from(button).sameAs(imageView).commit();//button的宽度和高度和imageView一样
+```
 
-## WeikeHttp入门:
+
+## WelikeHttp入门:
  首先来看看框架的调试信息,是不是一目了然.
 ![DEBUG](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log.png)
 ![DEBUG2](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/screenshot/log2.png)
@@ -223,7 +233,7 @@ User savedUser = db.findBeanByID(1);
 ```java
 User wantoUpdateUser = new User();
 wantoUpdateUser.name = "NiHao";
-db.updateDbByID(wantoUpdateUser);
+db.updateDbByID(1,wantoUpdateUser);
 ```
 
 * 删除指ID定的Bean

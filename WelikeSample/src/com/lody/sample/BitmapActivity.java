@@ -14,6 +14,7 @@ import com.lody.welike.http.HttpResponse;
 import com.lody.welike.ui.WelikeActivity;
 import com.lody.welike.ui.WelikeToast;
 import com.lody.welike.ui.annotation.JoinView;
+import com.lody.welike.ui.screenadapter.ViewPorter;
 import com.lody.welike.utils.WeLog;
 
 
@@ -38,6 +39,13 @@ public class BitmapActivity extends WelikeActivity {
         setContentView(R.layout.bitmap_layout);
     }
 
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        ViewPorter.from(imageView).divHeight(4).fillWidth().commit();
+        ViewPorter.from(show).sameAs(imageView).commit();
+        ViewPorter.from(clearCache).sameAs(imageView).commit();
+    }
 
     @Override
     public void onWidgetClick(View widget) {

@@ -13,7 +13,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        WelikeGuard.enableGuard();
+        // WelikeGuard.enableGuard();
         //此时只要抛出的不是RuntimeException,UI线程就会继续跑下去
         WelikeGuard.registerUnCaughtHandler(new Thread.UncaughtExceptionHandler() {
             @Override

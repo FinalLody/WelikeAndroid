@@ -4,10 +4,12 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lody.welike.ui.WelikeActivity;
 import com.lody.welike.ui.annotation.JoinView;
+import com.lody.welike.ui.screenadapter.ViewPorter;
 import com.lody.welike.utils.MultiAsyncTask;
 
 /**
@@ -28,8 +30,8 @@ public class MainActivity extends WelikeActivity {
     public void initGlobalView(Bundle savedInstanceState) {
         super.initGlobalView(savedInstanceState);
         setContentView(R.layout.main_layout);
-
     }
+
 
     @Override
     public void initWidget() {
