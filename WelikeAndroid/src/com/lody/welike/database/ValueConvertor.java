@@ -99,7 +99,11 @@ public class ValueConvertor {
     public static String valueToString(DataType dataType, Object o) {
         switch (dataType) {
             case INTEGER:
-                return String.valueOf((int) o);
+                if (o instanceof Boolean) {
+                    return ((boolean) o) ? "1" : "0";
+                } else {
+                    return String.valueOf((int) o);
+                }
             case TEXT:
                 return "\"" + o + "\"";
             case DOUBLE:
