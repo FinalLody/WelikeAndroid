@@ -71,6 +71,7 @@ public class SQLTypeParser {
      */
     public static boolean matchType(Field field, DataType dataType) {
         DataType fieldDataType = getDataType(field.getType());
+
         return dataType != null && fieldDataType == (dataType);
     }
 

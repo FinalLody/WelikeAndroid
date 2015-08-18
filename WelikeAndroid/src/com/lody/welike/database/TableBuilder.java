@@ -1,10 +1,15 @@
 package com.lody.welike.database;
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.lody.welike.WelikeDao;
 import com.lody.welike.database.annotation.ID;
 import com.lody.welike.database.annotation.Table;
 import com.lody.welike.database.bean.TableInfo;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +37,17 @@ public class TableBuilder {
         tableInfo = new TableInfo();
         //Table注解解析
         Table table = clazz.getAnnotation(Table.class);
+        String afterTableCreateMethod = table.afterTableCreate();
+        if (afterTableCreateMethod.trim().length() > 0) {
+            try {
+                Method method = clazz.getDeclaredMethod(afterTableCreateMethod, WelikeDao.class);
+                if (method != null && Modifier.isStatic(method.getModifiers())) {
+                    method.setAccessible(true);
+                    tableInfo.afterTableCreateMethod = method;
+                }
+            } catch (Throwable e) {
+            }
+        }
         if (table != null && table.name().trim().length() != 0) {
             tableInfo.tableName = table.name();
         } else {

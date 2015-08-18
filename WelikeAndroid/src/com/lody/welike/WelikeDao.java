@@ -20,6 +20,8 @@ import com.lody.welike.utils.WeLog;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -261,6 +263,14 @@ public class WelikeDao {
                 WeLog.w(sql);
             }
             db.execSQL(sql);
+            Method afterTableCreateMethod = tableInfo.afterTableCreateMethod;
+            if (afterTableCreateMethod != null) {
+                //如果afterTableMethod存在,就调用它
+                try {
+                    afterTableCreateMethod.invoke(null, this);
+                } catch (Throwable e) {
+                }
+            }
         }
     }
 

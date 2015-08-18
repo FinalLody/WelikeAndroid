@@ -202,7 +202,7 @@ new BitmapCallback() {
 ```java
 
 /*表名,可有可无,默认为类名.*/
-@Table(name="USER")
+@Table(name="USER",afterTableCreate="afterTableCreate")
 public class User{
 @ID
 public int id;//id可有可无,根据自己是否需要来加.
@@ -211,6 +211,9 @@ public int id;//id可有可无,根据自己是否需要来加.
 @NotNull
 public String name;
 
+    public static void afterTableCreate(WelikeDao dao){
+        //在当前的表被创建时回调,可以在这里做一些表的初始化工作
+    }
 }
 ```
 * 然后将它写入到数据库

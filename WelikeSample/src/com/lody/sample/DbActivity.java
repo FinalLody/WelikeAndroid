@@ -40,7 +40,6 @@ public class DbActivity extends WelikeActivity {
         super.initGlobalView(savedInstanceState);
         dao = WelikeDao.instance("Welike.db");
         setContentView(R.layout.db_layout);
-        dao.dropAllTable();
     }
 
     @Override
@@ -82,6 +81,7 @@ public class DbActivity extends WelikeActivity {
         String queryField = "id=";
         editText.setText(queryField);
         editText.setSelection(queryField.length());
+
         new AlertDialog.Builder(this)
                 .setTitle("输入where语句(查询条件)")
                 .setNegativeButton("取消",null)
@@ -115,7 +115,12 @@ public class DbActivity extends WelikeActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int id = Integer.valueOf(editText.getText().toString());
-                dao.deleteBeanByID(MyBean.class, id);
+                try {
+                    dao.deleteBeanByID(MyBean.class, id);
+                } catch (Throwable e) {
+                    WelikeToast.toast("操作失败:" + e.getMessage());
+                    return;
+                }
                 refreshList();
                 WelikeToast.toast("操作完成!");
             }

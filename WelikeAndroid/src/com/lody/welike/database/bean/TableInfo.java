@@ -3,6 +3,7 @@ package com.lody.welike.database.bean;
 import com.lody.welike.database.DataType;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
@@ -39,5 +40,7 @@ public class TableInfo {
      * 是否已经创建
      */
     public boolean isCreate = false;
+
+    public Method afterTableCreateMethod;
 
 }

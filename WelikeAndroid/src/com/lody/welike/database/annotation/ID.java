@@ -15,7 +15,7 @@ public @interface ID {
     /**
      * 只对Integer类型的ID字段有效
      *
-     * @return
+     * @return 是否为自增长
      */
     boolean autoIncrement() default false;
 }
