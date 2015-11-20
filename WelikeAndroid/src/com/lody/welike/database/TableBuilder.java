@@ -38,14 +38,14 @@ public class TableBuilder {
         //Table注解解析
         Table table = clazz.getAnnotation(Table.class);
         String afterTableCreateMethod = table.afterTableCreate();
-        if (afterTableCreateMethod.trim().length() > 0) {
+        if (afterTableCreateMethod != null && afterTableCreateMethod.trim().length() > 0) {
             try {
                 Method method = clazz.getDeclaredMethod(afterTableCreateMethod, WelikeDao.class);
                 if (method != null && Modifier.isStatic(method.getModifiers())) {
                     method.setAccessible(true);
                     tableInfo.afterTableCreateMethod = method;
                 }
-            } catch (Throwable e) {
+            } catch (Throwable ignored) {
             }
         }
         if (table != null && table.name().trim().length() != 0) {
