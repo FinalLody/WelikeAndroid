@@ -1,7 +1,6 @@
 ![Logo](https://raw.githubusercontent.com/FinalLody/WelikeAndroid/master/Welike_Android.png)
 
 ![license](https://img.shields.io/crates/l/rustc-serialize.svg)
-![BuildStatus](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)
 ![Convert](https://img.shields.io/codecov/c/github/codecov/example-python.svg)
 
 ##WelikeAndroid 是什么?
