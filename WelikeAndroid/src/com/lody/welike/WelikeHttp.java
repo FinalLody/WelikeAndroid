@@ -247,6 +247,8 @@ public class WelikeHttp {
     }
 
 
+
+
     /**
      * 销毁WeLikeHttp实例<br>
      * <b>警告:慎用此方法</b>, 本方法调用后将会释放全部的资源,Http请求执行队列也会被停止.

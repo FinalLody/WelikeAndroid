@@ -45,7 +45,7 @@ public class DynamicActivityBinder {
         for (Method method : initDataMethod) {
             try {
                 method.invoke(activity);
-            } catch (Throwable e) {
+            } catch (Throwable ignored) {
             }
         }
     }
@@ -78,7 +78,7 @@ public class DynamicActivityBinder {
             if (id != 0) {
                 try {
                     view = activity.findViewById(id);
-                } catch (Throwable e) {
+                } catch (Throwable ignored) {
                 }
             } else if (name.trim().length() != 0) {
                 String packageName = activity.getPackageName();
@@ -88,7 +88,7 @@ public class DynamicActivityBinder {
             if (view != null) {
                 try {
                     field.set(activity, view);
-                } catch (Throwable e) {
+                } catch (Throwable ignored) {
                 }
                 if (joinView.click() || field.getType().isAssignableFrom(Button.class)) {
                     view.setOnClickListener(activity);

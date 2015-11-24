@@ -21,8 +21,8 @@ public class GuardActivity extends WelikeActivity {
     @JoinView(id = R.id.throw_3)
     private Button throw3;
     @Override
-    public void initGlobalView(Bundle savedInstanceState) {
-        super.initGlobalView(savedInstanceState);
+    public void initRootView(Bundle savedInstanceState) {
+        super.initRootView(savedInstanceState);
         setContentView(R.layout.guard_layout);
     }
 

@@ -1,16 +1,12 @@
 package com.lody.sample;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lody.welike.ui.WelikeActivity;
 import com.lody.welike.ui.annotation.JoinView;
-import com.lody.welike.ui.screenadapter.ViewPorter;
-import com.lody.welike.utils.MultiAsyncTask;
 
 /**
  * @author Lody
@@ -27,8 +23,8 @@ public class MainActivity extends WelikeActivity {
     @JoinView(id = R.id.guard)
     private Button guardButton;
     @Override
-    public void initGlobalView(Bundle savedInstanceState) {
-        super.initGlobalView(savedInstanceState);
+    public void initRootView(Bundle savedInstanceState) {
+        super.initRootView(savedInstanceState);
         setContentView(R.layout.main_layout);
     }
 

@@ -21,7 +21,7 @@ public class HttpSessionManager {
     /**
      * 取得会话管理器
      *
-     * @return
+     * @return 会话管理器
      */
     public static HttpSessionManager getManager() {
         return HttpSessionManagerHolder.INSTANCE;
@@ -40,10 +40,8 @@ public class HttpSessionManager {
         HttpSession session = urlToSessionMap.get(url);
         if (session == null) {
             synchronized (urlToSessionMap) {
-                if (session == null) {
-                    session = new HttpSession(url, requestMethod);
-                    urlToSessionMap.put(url, session);
-                }
+                session = new HttpSession(url, requestMethod);
+                urlToSessionMap.put(url, session);
             }
         }
         return session;

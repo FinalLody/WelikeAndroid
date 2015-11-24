@@ -2,8 +2,7 @@ package com.lody.welike;
 
 /**
  * 有些人不太喜欢WelikeXXX.getDefault()这种方式,
- * 那么这个类适合你,<br>
- * Welike.xxx直接拿到,爽吧!
+ * 那么这个类适合你.<br>
  *
  * @author Lody
  * @version 1.0

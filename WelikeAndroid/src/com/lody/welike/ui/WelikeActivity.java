@@ -2,26 +2,17 @@ package com.lody.welike.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 
 import com.lody.welike.utils.MultiAsyncTask;
-import com.lody.welike.utils.NoLeakHandler;
-import com.lody.welike.utils.NoLeakHandlerInterface;
 
 /**
  * 定义了一套回调标准的Activity
  *
  * @author Lody
- * @version 1.1
+ * @version 1.2
  */
-public class WelikeActivity extends Activity implements View.OnClickListener, NoLeakHandlerInterface {
-
-    /**
-     * 不会发生内存泄露的Handler,请使用本Handler.
-     */
-    protected Handler noLeakHandler = new NoLeakHandler(this).handler();
+public class WelikeActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +33,21 @@ public class WelikeActivity extends Activity implements View.OnClickListener, No
                 onDataLoaded();
             }
         }.execute();
+        initRootView(savedInstanceState);
         initGlobalView(savedInstanceState);
         DynamicActivityBinder.joinAllView(this);
         initWidget();
+    }
+
+
+    /**
+     * 加载根视图.<br>
+     * 已过期,请视图initRootView(bundle)
+     * @param savedInstanceState bundle
+     */
+    @Deprecated
+    public void initGlobalView(Bundle savedInstanceState) {
+
     }
 
     /**
@@ -54,9 +57,9 @@ public class WelikeActivity extends Activity implements View.OnClickListener, No
     }
 
     /**
-     * 加载根视图
+     * 加载根视图.<br>
      */
-    public void initGlobalView(Bundle savedInstanceState) {
+    public void initRootView(Bundle bundle) {
     }
 
 
@@ -80,20 +83,5 @@ public class WelikeActivity extends Activity implements View.OnClickListener, No
         onWidgetClick(v);
     }
 
-    @Override
-    public boolean isValid() {
-        return true;
-    }
 
-    @Override
-    public void handleMessage(Message msg) {
-
-    }
-
-    /**
-     * @return 不会发生内存泄露的Handler
-     */
-    public Handler getNoLeakHandler() {
-        return noLeakHandler;
-    }
 }

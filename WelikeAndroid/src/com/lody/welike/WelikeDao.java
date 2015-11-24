@@ -13,6 +13,7 @@ import com.lody.welike.database.SQLTypeParser;
 import com.lody.welike.database.SqLiteConfig;
 import com.lody.welike.database.TableBuilder;
 import com.lody.welike.database.ValueConvertor;
+import com.lody.welike.database.WhereBuilder;
 import com.lody.welike.database.bean.TableInfo;
 import com.lody.welike.reflect.Reflect;
 import com.lody.welike.utils.WeLog;
@@ -20,7 +21,6 @@ import com.lody.welike.utils.WeLog;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ import java.util.Map;
  *         基于<b>DTO(DataToObject)</b>映射的数据库操纵模型.
  *         通过少量可选的注解,即可构造数据模型.
  *         增删查改异常轻松.
- * @version 1.3
+ * @version 2.0
  */
 public class WelikeDao {
 
@@ -77,7 +77,7 @@ public class WelikeDao {
      * 根据配置取得用于操纵数据库的WeLikeDao实例
      *
      * @param config
-     * @return
+     * @return 数据库引擎
      */
     public static WelikeDao instance(SqLiteConfig config) {
         if (config.getDbName() == null) {
@@ -99,7 +99,7 @@ public class WelikeDao {
     /**
      * 根据默认配置取得操纵数据库的WeLikeDao实例
      *
-     * @return
+     * @return 数据库引擎
      */
     public static WelikeDao instance() {
         return instance(SqLiteConfig.DEFAULT_CONFIG);
@@ -108,7 +108,7 @@ public class WelikeDao {
     /**
      * 取得操纵数据库的WeLikeDao实例
      *
-     * @param dbName
+     * @param dbName 数据库名
      * @return
      */
     public static WelikeDao instance(String dbName) {
@@ -120,8 +120,8 @@ public class WelikeDao {
     /**
      * 取得操纵数据库的WeLikeDao实例
      *
-     * @param dbVersion
-     * @return
+     * @param dbVersion 数据库版本
+     * @return 数据库引擎
      */
     public static WelikeDao instance(int dbVersion) {
         SqLiteConfig config = new SqLiteConfig();
@@ -132,8 +132,8 @@ public class WelikeDao {
     /**
      * 取得操纵数据库的WeLikeDao实例
      *
-     * @param listener
-     * @return
+     * @param listener 数据库升级监听器
+     * @return 数据库引擎
      */
     public static WelikeDao instance(DbUpdateListener listener) {
         SqLiteConfig config = new SqLiteConfig();
@@ -144,9 +144,9 @@ public class WelikeDao {
     /**
      * 取得操纵数据库的WeLikeDao实例
      *
-     * @param dbName
-     * @param dbVersion
-     * @return
+     * @param dbName 数据库名
+     * @param dbVersion 数据库版本
+     * @return 数据库引擎
      */
     public static WelikeDao instance(String dbName, int dbVersion) {
         SqLiteConfig config = new SqLiteConfig();
@@ -158,10 +158,10 @@ public class WelikeDao {
     /**
      * 取得操纵数据库的WeLikeDao实例
      *
-     * @param dbName
-     * @param dbVersion
-     * @param listener
-     * @return
+     * @param dbName 数据库名
+     * @param dbVersion 数据库版本
+     * @param listener 数据库监听器
+     * @return 数据库引擎
      */
     public static WelikeDao instance(String dbName, int dbVersion, DbUpdateListener listener) {
         SqLiteConfig config = new SqLiteConfig();
@@ -174,13 +174,16 @@ public class WelikeDao {
     /**
      * 配置为新的参数(不改变数据库名).
      *
-     * @param config
+     * @param config 数据库配置副本
      */
     private void applyConfig(SqLiteConfig config) {
         this.sqLiteConfig.debugMode = config.debugMode;
         this.sqLiteConfig.setDbUpdateListener(config.getDbUpdateListener());
     }
 
+    /**
+     * 释放数据库
+     */
     public void release() {
         DAO_MAP.clear();
         if (sqLiteConfig.debugMode) {
@@ -268,7 +271,7 @@ public class WelikeDao {
                 //如果afterTableMethod存在,就调用它
                 try {
                     afterTableCreateMethod.invoke(null, this);
-                } catch (Throwable e) {
+                } catch (Throwable ignored) {
                 }
             }
         }
@@ -294,7 +297,7 @@ public class WelikeDao {
                 }
             }
 
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
 
         } finally {
             if (cursor != null)
@@ -316,7 +319,7 @@ public class WelikeDao {
             while (cursor.moveToNext()) {
                 try {
                     dropTable(cursor.getString(0));
-                } catch (SQLException e) {
+                } catch (SQLException ignored) {
                 }
             }
         }
@@ -357,8 +360,8 @@ public class WelikeDao {
             while (cursor.moveToNext()) {
                 tableList.add(cursor.getString(0));
             }
+            cursor.close();
         }
-
         return tableList;
 
     }
@@ -396,17 +399,15 @@ public class WelikeDao {
      * 存储一个Bean.
      *
      * @param bean
-     * @return
+     * @return 数据库引擎
      */
     public WelikeDao saveBean(Object bean) {
         createTableIfNeed(bean.getClass());
-        if (bean != null) {
-            String statement = SQLMaker.insertIntoTable(bean);
-            if (sqLiteConfig.debugMode) {
-                WeLog.w(statement);
-            }
-            db.execSQL(statement);
+        String statement = SQLMaker.insertIntoTable(bean);
+        if (sqLiteConfig.debugMode) {
+            WeLog.w(statement);
         }
+        db.execSQL(statement);
         return this;
 
     }
@@ -415,7 +416,7 @@ public class WelikeDao {
      * 存储多个Bean.
      *
      * @param beans
-     * @return
+     * @return 数据库引擎
      */
     public WelikeDao saveBeans(Object[] beans) {
         for (Object o : beans) {
@@ -428,10 +429,10 @@ public class WelikeDao {
     /**
      * 存储多个Bean.
      *
-     * @param beans
-     * @return
+     * @param beans 要存储的Bean
+     * @return 数据库引擎
      */
-    public WelikeDao saveBeans(List<Object> beans) {
+    public<T> WelikeDao saveBeans(List<T> beans) {
 
         for (Object o : beans) {
             saveBean(o);
@@ -443,9 +444,8 @@ public class WelikeDao {
     /**
      * 寻找Bean对应的全部数据
      *
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param clazz Bean实体类
+     * @return 查询到的数据列表
      */
     public <T> List<T> findAll(Class<?> clazz) {
         createTableIfNeed(clazz);
@@ -480,12 +480,16 @@ public class WelikeDao {
 
     }
 
+    public <T> WhereBuilder findBeans(Class<T> clazz){
+        return new WhereBuilder(this,clazz);
+    }
+
     /**
      * 根据where语句寻找Bean
      *
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param clazz Bean实体类
+     * @param where 查询语句
+     * @return 查询结果
      */
     public <T> List<T> findBeanByWhere(Class<?> clazz, String where) {
         createTableIfNeed(clazz);
@@ -532,7 +536,7 @@ public class WelikeDao {
         }
         try {
             db.execSQL(statement);
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
 
         return this;
@@ -577,10 +581,10 @@ public class WelikeDao {
     /**
      * 根据给定的where更新数据
      *
-     * @param tableClass
-     * @param where
-     * @param bean
-     * @return
+     * @param tableClass 数据库Bean实体类
+     * @param where where语句
+     * @param bean Bean对象
+     * @return 数据库引擎
      */
     public WelikeDao updateByWhere(Class<?> tableClass, String where, Object bean) {
         createTableIfNeed(tableClass);
@@ -590,7 +594,6 @@ public class WelikeDao {
             WeLog.w(statement);
         }
         db.execSQL(statement);
-
 
         return this;
     }
@@ -620,10 +623,9 @@ public class WelikeDao {
     /**
      * 根据ID查找Bean
      *
-     * @param tableClass
-     * @param id
-     * @param <T>
-     * @return
+     * @param tableClass 表名
+     * @param id ID
+     * @return 查询结果
      */
     public <T> T findBeanByID(Class<?> tableClass, Object id) {
         createTableIfNeed(tableClass);
@@ -673,7 +675,7 @@ public class WelikeDao {
      * 调用后请确保你不会在接下来的代码中继续用到本实例.
      */
     public void destroy() {
-        DAO_MAP.remove(this);
+        DAO_MAP.remove(sqLiteConfig.getDbName());
         this.sqLiteConfig = null;
         this.db = null;
     }
@@ -681,7 +683,7 @@ public class WelikeDao {
     /**
      * 取得内部操纵的SqliteDatabase.
      *
-     * @return
+     * @return SQLiteDatabase
      */
     public SQLiteDatabase getDb() {
         return db;

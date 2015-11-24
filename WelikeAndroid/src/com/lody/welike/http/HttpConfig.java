@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author Lody
  * @version 1.3
  */
-public class HttpConfig {
+public final class HttpConfig {
 
     /**
      * 默认缓存文件夹名
@@ -85,6 +85,11 @@ public class HttpConfig {
      */
     public int concurrency = 5;
 
+    /**
+     * Http配置创建工厂
+     */
+    private static HttpConfigFactory DEFAULT_FACTORY = new HttpConfigFactory.DefaultHttpConfigFactory();
+
 
     /**
      * @return 编码类型
@@ -118,7 +123,11 @@ public class HttpConfig {
      * @return 创建的默认配置
      */
     public static HttpConfig newDefaultConfig() {
-        return new HttpConfig();
+        return DEFAULT_FACTORY.newDefaultConfig();
+    }
+
+    public static void setDefaultHttpConfigFactory(HttpConfigFactory defaultHttpConfigFactory){
+        HttpConfig.DEFAULT_FACTORY = defaultHttpConfigFactory;
     }
 
     /**
@@ -176,8 +185,8 @@ public class HttpConfig {
     }
 
     /**
-     * @param cacheDirName
-     * @param maxDiskCacheSize
+     * @param cacheDirName 缓存文件夹名
+     * @param maxDiskCacheSize 缓存大小
      */
     public HttpConfig(String cacheDirName, long maxDiskCacheSize) {
         this.cacheDirName = cacheDirName;
@@ -206,10 +215,12 @@ public class HttpConfig {
     /**
      * 得到当前时刻的缓存过期时间.
      *
-     * @return
+     * @return 过期时间
      */
     public long generateTimeoutDate() {
         return expiryDate == 0 ? 0 : System.currentTimeMillis() + expiryDate;
     }
+
+
 
 }

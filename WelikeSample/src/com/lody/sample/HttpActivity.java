@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.lody.welike.WelikeHttp;
-import com.lody.welike.http.DownloadController;
-import com.lody.welike.http.DownloadTask;
 import com.lody.welike.http.HttpParams;
 import com.lody.welike.http.HttpRequest;
 import com.lody.welike.http.HttpResponse;
@@ -40,8 +38,8 @@ public class HttpActivity extends WelikeActivity {
     ProgressBar progressBar;
 
     @Override
-    public void initGlobalView(Bundle savedInstanceState) {
-        super.initGlobalView(savedInstanceState);
+    public void initRootView(Bundle savedInstanceState) {
+        super.initRootView(savedInstanceState);
         setContentView(R.layout.http_layout);
     }
 

@@ -36,8 +36,8 @@ public class DbActivity extends WelikeActivity {
 
 
     @Override
-    public void initGlobalView(Bundle savedInstanceState) {
-        super.initGlobalView(savedInstanceState);
+    public void initRootView(Bundle savedInstanceState) {
+        super.initRootView(savedInstanceState);
         dao = WelikeDao.instance("Welike.db");
         setContentView(R.layout.db_layout);
     }
@@ -57,8 +57,10 @@ public class DbActivity extends WelikeActivity {
             removeEvent();
 
         }else if (widget == queryButton){
+
             queryEvent();
         }else if (widget == updateButton){
+
             updateEvent();
         }
     }

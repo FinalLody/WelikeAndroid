@@ -62,7 +62,7 @@ public class HttpSession {
     /**
      * 取得请求的方式
      *
-     * @return
+     * @return 请求方式
      */
     public RequestMethod getRequestMethod() {
         return requestMethod;
@@ -71,7 +71,7 @@ public class HttpSession {
     /**
      * 设置请求的方式
      *
-     * @param requestMethod
+     * @param requestMethod 请求方式
      */
     public void setRequestMethod(RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
@@ -80,8 +80,8 @@ public class HttpSession {
     /**
      * 打开会话的网络连接
      *
-     * @param request
-     * @return
+     * @param request Http请求
+     * @return 请求对应的Http连接
      * @throws IOException
      */
     public HttpURLConnection open(HttpRequest request) throws IOException {

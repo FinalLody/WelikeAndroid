@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.lody.welike.WelikeBitmap;
-import com.lody.welike.bitmap.BitmapPreprocessor;
 import com.lody.welike.bitmap.callback.BitmapCallback;
 import com.lody.welike.http.HttpRequest;
 import com.lody.welike.http.HttpResponse;
@@ -34,8 +33,8 @@ public class BitmapActivity extends WelikeActivity {
     private Button clearCache;
 
     @Override
-    public void initGlobalView(Bundle savedInstanceState) {
-        super.initGlobalView(savedInstanceState);
+    public void initRootView(Bundle savedInstanceState) {
+        super.initRootView(savedInstanceState);
         setContentView(R.layout.bitmap_layout);
     }
 

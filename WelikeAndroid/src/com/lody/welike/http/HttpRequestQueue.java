@@ -33,7 +33,7 @@ public class HttpRequestQueue implements Runnable {
     public synchronized void enqueue(HttpRequest request) {
         try {
             requestQueue.put(request);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
     }
 
