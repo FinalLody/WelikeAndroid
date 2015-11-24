@@ -6,7 +6,7 @@
 ##WelikeAndroid 是什么?
 WelikeAndroid 是一款引入即用的便捷开发框架,致力于为程序员打造最佳的编程体验,<br>使用WelikeAndroid, 你会觉得写代码是一件很轻松的事情.
 
-##欢迎加入我们的大家庭:
+##欢迎加入我们的Android开发群:
 ###[142853711](http://jq.qq.com/?_wv=1027&k=cxU1Or)(WelikeAndroid交流群)
 <br>
 ##Welike带来了哪些特征？
@@ -230,6 +230,11 @@ db.save(user);
 User savedUser = db.findBeanByID(1);
 
 ```
+* SQL复杂条件查询
+```java
+List<User> users = db.findBeans().where("name = Lody").or("id = 1").find();
+
+```
 * 更新指定ID的Bean
 
 ```java
@@ -251,7 +256,7 @@ db.deleteBeanByID(1);
 ```java
 
 =>@initData(所有标有InitData注解的方法都最早在子线程被调用)
-=>initGlobalView()
+=>initRootView(bundle)
 =>@JoinView(将标有此注解的View自动findViewByID和setOnClickListener)
 =>onDataLoaded(数据加载完成时回调)
 =>点击事件会回调onWidgetClick(View Widget)
@@ -282,15 +287,6 @@ Button welikeBtn;
 * QQ: `382816028`
 * Email:`382816028@qq.com`
 * 来`142853711`群与大家一起讨论
-
-
-##关于作者
-
-```javascript
-var Me = {
-nickName  : "Lody"
-}
-```
 
 `Git`: https://github.com/FinalLody/WelikeAndroid<br>
 `Git@OSC`: http://git.oschina.net/lody/WelikeAndroid
