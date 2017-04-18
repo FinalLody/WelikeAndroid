@@ -3,13 +3,13 @@
 ![license](https://img.shields.io/crates/l/rustc-serialize.svg)
 ![Convert](https://img.shields.io/codecov/c/github/codecov/example-python.svg)
 
-##WelikeAndroid 是什么?
+## WelikeAndroid 是什么?
 WelikeAndroid 是一款引入即用的便捷开发框架,致力于为程序员打造最佳的编程体验,<br>使用WelikeAndroid, 你会觉得写代码是一件很轻松的事情.
 
-##欢迎加入我们的Android开发群:
-###[142853711](http://jq.qq.com/?_wv=1027&k=cxU1Or)(WelikeAndroid交流群)
+## 欢迎加入我们的Android开发群:
+### [142853711](http://jq.qq.com/?_wv=1027&k=cxU1Or)(WelikeAndroid交流群)
 <br>
-##Welike带来了哪些特征？
+## Welike带来了哪些特征？
 
 WelikeAndroid目前包含五个大模块:
 
@@ -27,12 +27,12 @@ WelikeAndroid目前包含五个大模块:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-##下文将教你如何圆润的使用WelikeAndroid:<br>
-###通过WelikeContext在任意处取得上下文:
+## 下文将教你如何圆润的使用WelikeAndroid:<br>
+### 通过WelikeContext在任意处取得上下文:
 * WelikeContext.getApplication(); 就可以取得当前App的上下文
 * WelikeToast.toast("你好!");  简单一步弹出Toast.<br>
 
-##WelikeGuard(异常安全隔离机制用法):
+## WelikeGuard(异常安全隔离机制用法):
 * 第一步,开启异常隔离机制:
 
 ```java
@@ -195,7 +195,7 @@ new BitmapCallback() {
 ```
 * 如果需要自定义Config,请看BitmapConfig这个类.
 
-##WelikeDAO入门：
+## WelikeDAO入门：
 * 首先写一个Bean.
 
 ```java
@@ -251,7 +251,7 @@ db.deleteBeanByID(1);
 
 * 更多实例请看DEMO和API文档.
 
-##十秒钟学会WelikeActivity
+## 十秒钟学会WelikeActivity
 * 我们将Activity的生命周期划分如下:
 ```java
 
@@ -262,7 +262,7 @@ db.deleteBeanByID(1);
 =>点击事件会回调onWidgetClick(View Widget)
 ```
 
-###关于@JoinView的细节:
+### 关于@JoinView的细节:
 * 有以下三种写法:
 
 ```java
@@ -281,7 +281,7 @@ Button welikeBtn;
 * `click`为`true`时会自动调用view的setOnClickListener方法,并在`onWidgetClick`回调.
 * 当需要绑定的是一个`Button`的时候, `click属性`默认为`true`,其它的View则默认为`false`.
 
-##有问题反馈
+## 有问题反馈
 在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
 
 * QQ: `382816028`
